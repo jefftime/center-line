@@ -1,6 +1,6 @@
 {
 	"name": "center-line",
-	"displayName": "Center Line",
+	"displayName": "CenterLine",
 	"description": "Centers the line the cursor is currently on",
 	"version": "0.0.1",
 	"engines": {
