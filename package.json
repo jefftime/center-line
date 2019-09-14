@@ -3,6 +3,10 @@
   "displayName": "CenterLine",
   "description": "Centers the line the cursor is currently on",
   "publisher": "Jefftime",
+  "repository": {
+    "url": "https://github.com/jefftime/center-line",
+    "type": "git"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.36.0"
