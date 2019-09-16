@@ -23,46 +23,16 @@ export function activate(context: vscode.ExtensionContext) {
     const ed = vscode.window.activeTextEditor;
     if (ed === undefined) return;
 
-    const oldPos = ed.selection.active;
-
-    // Get middle of screen (as best that we can)
-    await vscode.commands.executeCommand(
-      'cursorMove',
-      {
-        'to': 'viewPortCenter',
-        'by': 'line'
-      }
-    );
-
-    // Store the new position and get delta
-    const newPos = ed.selection.active;
-    const scrollDistance = newPos.line - oldPos.line;
-
-    // Reposition the window and then reset the cursor position
+    const start = ed.visibleRanges[0].start.line;
+    const end = ed.visibleRanges[0].end.line;
+    const range = end - start;
+    const pos = ed.selection.active.line;
+    const scrollDistance = pos - start - (range / 2);
     await vscode.commands.executeCommand(
       'editorScroll',
       {
-        'to': 'up',
-        'by': 'line',
+        'to': 'down',
         'value': scrollDistance
-      }
-    );
-    await vscode.commands.executeCommand(
-      'cursorMove',
-      {
-        'to': 'up',
-        'by': 'line',
-        'value': scrollDistance
-      }
-    );
-  
-    // Reset horizontal position to original value
-    await vscode.commands.executeCommand(
-      'cursorMove',
-      {
-        'to': 'right',
-        'by': 'character',
-        'value': oldPos.character - newPos.character
       }
     );
   });
